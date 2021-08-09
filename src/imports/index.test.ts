@@ -1,10 +1,12 @@
-import {getResource, ImportScript} from './index';
-import http from 'http';
+import {getResource, loadToAst} from './index';
+import http from 'https';
 
 const option = {
   async get(url: string): Promise<string> {
     return new Promise(resolve => {
-      http.get(url, (res) => {
+      http.get(url, {
+        timeout: 30000,
+      },(res) => {
         const { statusCode } = res;
         if(statusCode !== 200) {
           console.error(`${url} response load error!`);
@@ -151,7 +153,7 @@ const code = `
 // 请求是否异常
 describe('[getResource]', () => {
   it('[getResource] is response 200 and text is string', async () => {
-    const response = await getResource('http://www.baidu.com', option);
+    const response = await getResource('https://www.baidu.com', option);
     expect(typeof response).toContain('string');
     expect(response.length).toBeGreaterThan(0);
   });
@@ -168,17 +170,17 @@ describe('[ImportScript]', () => {
         return a + b + c;
       }
     `;
-    const [localAst] = await ImportScript([code], option);
+    const [localAst] = await loadToAst([code], option);
     expect(localAst).toMatchObject(initAst);
   });
 
   it('[ImportScript] load local ast is string to Ast', async () => {
-    const [localAst] = await ImportScript([initAst], option);
+    const [localAst] = await loadToAst([initAst], option);
     expect(localAst).toMatchObject(initAst);
   });
 
   it('[ImportScript] load Promise code is string to Ast', async () => {
-    const [localAst] = await ImportScript([
+    const [localAst] = await loadToAst([
       // promise 对象加载
       new Promise(resolve => {
         setTimeout(() => {
@@ -190,10 +192,12 @@ describe('[ImportScript]', () => {
   });
 
   it('[ImportScript] load null is string to Ast', async () => {
-    const [localAst] = await ImportScript([null], option);
+    const [localAst] = await loadToAst([null], option);
     expect(localAst).toMatchObject({});
   });
   
+  it('[ImportScript] remote is string to Ast', async () => {
+    const [loadAst] = await loadToAst(['https://raw.githubusercontent.com/tang-haibo/remote-import/master/example/imports.js'], option);
+    expect(loadAst).toMatchObject(initAst);
+  }, 30000);
 });
-
-// 远程载入
