@@ -1,12 +1,12 @@
 interface ScriptEmtryAst {
-  [key: string]: ScriptEmtryAst | string | ScriptEmtryAst[];
+  [key: string]: any;
 }
 
 interface ExecCallback<T> {
   (): void;
 }
 
-type ScriptType = string | ScriptEmtryAst;
+type ScriptType = null | string | ScriptEmtryAst;
 type ScriptsEmtry = Promise<ScriptType> | ScriptType;
 
 interface RuntimeContext {

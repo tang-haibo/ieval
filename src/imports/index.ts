@@ -6,7 +6,8 @@ export function getResource (url: string, option: ContextOption): Promise<string
   return option.get(url);
 }
 
-export function formatAst<T>(
+// 远程代码载入执行
+export async function ImportScript(
   scripts: ScriptsEmtry[],
   option: ContextOption,
 ): Promise<ScriptsEmtry[]> {
@@ -25,13 +26,4 @@ export function formatAst<T>(
     }
     return {};
   }));
-}
-
-// 远程代码载入执行
-export async function ImportScript<T>(
-  scripts: ScriptsEmtry[],
-  option: ContextOption,
-): Promise<T> {
-  const asts = await formatAst(scripts, option);
-  return Promise.resolve(asts as unknown as T);
 }
