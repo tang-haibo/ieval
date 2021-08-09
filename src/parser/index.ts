@@ -6,10 +6,10 @@ import {parse} from 'acorn';
  * @param ecmaVersion 
  * @returns AST
  */
-export function Parser (scriptString: string, ecmaVersion: EcmaVersion = 2020): ScriptEmtryAst {
+export function parser (scriptString: string, ecmaVersion: EcmaVersion = 2020): ScriptEmtryAst {
   return parse(scriptString, {
     ecmaVersion,
   }) as unknown as ScriptEmtryAst;
 }
 
-export default Parser;
+export default parser;

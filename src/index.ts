@@ -1,9 +1,10 @@
-import {Parser} from './parser';
+import {parser} from './parser';
 import {EvalScript} from './eval';
-import {ImportScript} from './imports';
+import {ImportScript, getResource} from './imports';
 
 export {
-  Parser,
+  parser,
   ImportScript,
   EvalScript,
+  getResource,
 };

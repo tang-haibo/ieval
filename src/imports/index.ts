@@ -1,19 +1,37 @@
-import { Parser } from '../parser';
-import { isPromise, isAst, isString } from '../utils';
+import { parser } from '../parser';
+import { isPromise, isAst, isString, isNetworkUrl } from '../utils';
 
-// 远程代码载入执行
-export function ImportScript<T>(scripts: ScriptsEmtry[], callback?: ExecCallback<T>): Promise<ScriptsEmtry[]> {
-  // 创建执行环境
+// 各端实现不一致，这里实现被忽略
+export function getResource (url: string, option: ContextOption): Promise<string> {
+  return option.get(url);
+}
+
+export function formatAst<T>(
+  scripts: ScriptsEmtry[],
+  option: ContextOption,
+): Promise<ScriptsEmtry[]> {
   return Promise.all(scripts.map(item => {
+    if(isNetworkUrl(item)) {
+      return getResource(String(item), option).then((data: string) => parser(data));
+    }
     if(isString(item)) {
-      return Promise.resolve(Parser(item as string));
+      return Promise.resolve(parser(String(item)));
     }
     if(isPromise(item)) {
-      return (item as Promise<string>).then((data: string) => Parser(data));
+      return (item as Promise<string>).then((data: string) => parser(data));
     }
     if(isAst(item)) {
       return item;
     }
     return {};
   }));
+}
+
+// 远程代码载入执行
+export async function ImportScript<T>(
+  scripts: ScriptsEmtry[],
+  option: ContextOption,
+): Promise<T> {
+  const asts = await formatAst(scripts, option);
+  return Promise.resolve(asts as unknown as T);
 }

@@ -1,4 +1,4 @@
-function isJSON<T>(value: T) {
+export function isJSON<T>(value: T) {
   if (value && typeof value === 'object' && value !== null) {
     return true;
   }
@@ -18,4 +18,11 @@ export function isAst<T>(value: T) {
     return true;
   }
   return false;
+}
+
+export function isNetworkUrl<T>(value: T) {
+  if(!isString(value)) {
+    return false;
+  }
+  return /^(https?\:)?\/\//.test(String(value));
 }

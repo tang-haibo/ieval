@@ -8,3 +8,10 @@ interface ExecCallback<T> {
 
 type ScriptType = string | ScriptEmtryAst;
 type ScriptsEmtry = Promise<ScriptType> | ScriptType;
+
+interface ContextOption {
+  context: {
+    [type: string]: any;
+  },
+  get(url: string): Promise<string>;
+}
