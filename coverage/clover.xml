@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628494287859" clover="3.2.0">
-  <project timestamp="1628494287859" name="All files">
-    <metrics statements="97" coveredstatements="36" conditionals="2" coveredconditionals="2" methods="14" coveredmethods="2" elements="113" coveredelements="40" complexity="0" loc="97" ncloc="97" packages="5" files="5" classes="5"/>
+<coverage generated="1628496954994" clover="3.2.0">
+  <project timestamp="1628496954994" name="All files">
+    <metrics statements="94" coveredstatements="33" conditionals="2" coveredconditionals="2" methods="14" coveredmethods="2" elements="110" coveredelements="37" complexity="0" loc="94" ncloc="94" packages="5" files="5" classes="5"/>
     <package name="src">
       <metrics statements="10" coveredstatements="10" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="1"/>
       <file name="index.ts" path="/Users/tanghaibo/Projects/typescript/remote-import/src/index.ts">
@@ -19,16 +19,13 @@
       </file>
     </package>
     <package name="src.eval">
-      <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="index.ts" path="/Users/tanghaibo/Projects/typescript/remote-import/src/eval/index.ts">
-        <metrics statements="7" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.imports">

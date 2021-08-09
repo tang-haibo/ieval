@@ -28,6 +28,7 @@ const option = {
 describe('[getResource]', () => {
   it('[getResource] is response 200 and text is string', async () => {
     const response = await getResource('http://www.baidu.com', option);
-    console.log(response);
+    expect(typeof response).toContain('string');
+    expect(response.length).toBeGreaterThan(0);
   });
 });
