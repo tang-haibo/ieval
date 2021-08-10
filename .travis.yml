@@ -1,16 +1,7 @@
 language: node_js
 node_js:
   - "12"
-
 sudo: required
-
-before_install: sudo apt-get install libevent-dev -y
-
-install:
-  - wget -O memcached.tar.gz http://memcached.org/files/memcached-1.5.20.tar.gz
-  - tar -zxvf memcached.tar.gz
-  - cd memcached-1.5.20
-  - ./configure && make && sudo make install
-  - memcached -d
 script:
-    - npm ci && npm test && npm run report-coverage
+    - npm install
+    - npm run test && npm run coverage && npm run release
