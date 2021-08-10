@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628585022307" clover="3.2.0">
-  <project timestamp="1628585022307" name="All files">
-    <metrics statements="2194" coveredstatements="1736" conditionals="425" coveredconditionals="333" methods="122" coveredmethods="85" elements="2741" coveredelements="2154" complexity="0" loc="2194" ncloc="2194" packages="4" files="6" classes="6"/>
+<coverage generated="1628588362196" clover="3.2.0">
+  <project timestamp="1628588362196" name="All files">
+    <metrics statements="2194" coveredstatements="1742" conditionals="430" coveredconditionals="339" methods="122" coveredmethods="91" elements="2746" coveredelements="2172" complexity="0" loc="2194" ncloc="2194" packages="4" files="6" classes="6"/>
     <package name="eval">
-      <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="index.ts" path="/Users/tanghaibo/Projects/typescript/remote-import/src/eval/index.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="4" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="cond" truecount="1" falsecount="0"/>
         <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
       </file>
     </package>
     <package name="eval.interpreter">
-      <metrics statements="2127" coveredstatements="1669" conditionals="400" coveredconditionals="310" methods="114" coveredmethods="77"/>
+      <metrics statements="2127" coveredstatements="1675" conditionals="406" coveredconditionals="316" methods="114" coveredmethods="83"/>
       <file name="index.ts" path="/Users/tanghaibo/Projects/typescript/remote-import/src/eval/interpreter/index.ts">
         <metrics statements="2065" coveredstatements="1614" conditionals="390" coveredconditionals="301" methods="106" coveredmethods="76"/>
         <line num="1" count="1" type="stmt"/>
@@ -338,60 +338,60 @@
         <line num="312" count="3" type="stmt"/>
         <line num="313" count="3" type="stmt"/>
         <line num="314" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="315" count="7" type="stmt"/>
-        <line num="316" count="7" type="stmt"/>
-        <line num="317" count="7" type="stmt"/>
-        <line num="318" count="7" type="stmt"/>
-        <line num="319" count="7" type="stmt"/>
-        <line num="320" count="7" type="stmt"/>
-        <line num="321" count="7" type="stmt"/>
-        <line num="322" count="7" type="cond" truecount="0" falsecount="1"/>
-        <line num="323" count="7" type="stmt"/>
-        <line num="324" count="7" type="stmt"/>
-        <line num="325" count="7" type="stmt"/>
-        <line num="326" count="7" type="cond" truecount="0" falsecount="1"/>
-        <line num="327" count="7" type="stmt"/>
-        <line num="328" count="7" type="stmt"/>
-        <line num="329" count="7" type="stmt"/>
-        <line num="330" count="7" type="stmt"/>
+        <line num="315" count="8" type="stmt"/>
+        <line num="316" count="8" type="stmt"/>
+        <line num="317" count="8" type="stmt"/>
+        <line num="318" count="8" type="stmt"/>
+        <line num="319" count="8" type="stmt"/>
+        <line num="320" count="8" type="stmt"/>
+        <line num="321" count="8" type="stmt"/>
+        <line num="322" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="323" count="8" type="stmt"/>
+        <line num="324" count="8" type="stmt"/>
+        <line num="325" count="8" type="stmt"/>
+        <line num="326" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="327" count="8" type="stmt"/>
+        <line num="328" count="8" type="stmt"/>
+        <line num="329" count="8" type="stmt"/>
+        <line num="330" count="8" type="stmt"/>
         <line num="331" count="3" type="stmt"/>
         <line num="332" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="333" count="7" type="stmt"/>
-        <line num="334" count="7" type="stmt"/>
-        <line num="335" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="333" count="8" type="stmt"/>
+        <line num="334" count="8" type="stmt"/>
+        <line num="335" count="8" type="cond" truecount="0" falsecount="1"/>
         <line num="336" count="0" type="stmt"/>
-        <line num="337" count="7" type="stmt"/>
-        <line num="338" count="7" type="stmt"/>
-        <line num="339" count="7" type="stmt"/>
-        <line num="340" count="7" type="stmt"/>
-        <line num="341" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="337" count="8" type="stmt"/>
+        <line num="338" count="8" type="stmt"/>
+        <line num="339" count="8" type="stmt"/>
+        <line num="340" count="8" type="stmt"/>
+        <line num="341" count="8" type="cond" truecount="0" falsecount="1"/>
         <line num="342" count="0" type="stmt"/>
         <line num="343" count="0" type="stmt"/>
         <line num="344" count="0" type="stmt"/>
         <line num="345" count="0" type="stmt"/>
         <line num="346" count="0" type="stmt"/>
         <line num="347" count="0" type="stmt"/>
-        <line num="348" count="7" type="stmt"/>
-        <line num="349" count="7" type="stmt"/>
-        <line num="350" count="7" type="stmt"/>
-        <line num="351" count="7" type="stmt"/>
-        <line num="352" count="7" type="stmt"/>
-        <line num="353" count="7" type="stmt"/>
-        <line num="354" count="7" type="stmt"/>
-        <line num="355" count="7" type="stmt"/>
-        <line num="356" count="7" type="stmt"/>
-        <line num="357" count="7" type="stmt"/>
-        <line num="358" count="7" type="stmt"/>
-        <line num="359" count="7" type="stmt"/>
-        <line num="360" count="7" type="stmt"/>
-        <line num="361" count="7" type="stmt"/>
-        <line num="362" count="7" type="stmt"/>
-        <line num="363" count="7" type="stmt"/>
-        <line num="364" count="7" type="stmt"/>
-        <line num="365" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="348" count="8" type="stmt"/>
+        <line num="349" count="8" type="stmt"/>
+        <line num="350" count="8" type="stmt"/>
+        <line num="351" count="8" type="stmt"/>
+        <line num="352" count="8" type="stmt"/>
+        <line num="353" count="8" type="stmt"/>
+        <line num="354" count="8" type="stmt"/>
+        <line num="355" count="8" type="stmt"/>
+        <line num="356" count="8" type="stmt"/>
+        <line num="357" count="8" type="stmt"/>
+        <line num="358" count="8" type="stmt"/>
+        <line num="359" count="8" type="stmt"/>
+        <line num="360" count="8" type="stmt"/>
+        <line num="361" count="8" type="stmt"/>
+        <line num="362" count="8" type="stmt"/>
+        <line num="363" count="8" type="stmt"/>
+        <line num="364" count="8" type="stmt"/>
+        <line num="365" count="8" type="cond" truecount="0" falsecount="1"/>
         <line num="366" count="0" type="stmt"/>
         <line num="367" count="0" type="stmt"/>
-        <line num="368" count="7" type="stmt"/>
+        <line num="368" count="8" type="stmt"/>
         <line num="369" count="3" type="stmt"/>
         <line num="370" count="3" type="stmt"/>
         <line num="371" count="0" type="stmt"/>
@@ -410,8 +410,8 @@
         <line num="384" count="0" type="stmt"/>
         <line num="385" count="3" type="stmt"/>
         <line num="386" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="387" count="7" type="stmt"/>
-        <line num="388" count="7" type="stmt"/>
+        <line num="387" count="8" type="stmt"/>
+        <line num="388" count="8" type="stmt"/>
         <line num="389" count="3" type="stmt"/>
         <line num="390" count="3" type="stmt"/>
         <line num="391" count="0" type="stmt"/>
@@ -434,20 +434,20 @@
         <line num="408" count="2" type="stmt"/>
         <line num="409" count="3" type="stmt"/>
         <line num="410" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="411" count="7" type="stmt"/>
-        <line num="412" count="7" type="stmt"/>
-        <line num="413" count="7" type="stmt"/>
-        <line num="414" count="7" type="stmt"/>
-        <line num="415" count="7" type="stmt"/>
-        <line num="416" count="7" type="stmt"/>
-        <line num="417" count="7" type="cond" truecount="1" falsecount="0"/>
-        <line num="418" count="266" type="cond" truecount="1" falsecount="0"/>
-        <line num="419" count="76" type="stmt"/>
-        <line num="420" count="76" type="stmt"/>
-        <line num="421" count="7" type="stmt"/>
-        <line num="422" count="7" type="stmt"/>
-        <line num="423" count="7" type="stmt"/>
-        <line num="424" count="7" type="stmt"/>
+        <line num="411" count="8" type="stmt"/>
+        <line num="412" count="8" type="stmt"/>
+        <line num="413" count="8" type="stmt"/>
+        <line num="414" count="8" type="stmt"/>
+        <line num="415" count="8" type="stmt"/>
+        <line num="416" count="8" type="stmt"/>
+        <line num="417" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="418" count="304" type="cond" truecount="1" falsecount="0"/>
+        <line num="419" count="152" type="stmt"/>
+        <line num="420" count="152" type="stmt"/>
+        <line num="421" count="8" type="stmt"/>
+        <line num="422" count="8" type="stmt"/>
+        <line num="423" count="8" type="stmt"/>
+        <line num="424" count="8" type="stmt"/>
         <line num="425" count="3" type="stmt"/>
         <line num="426" count="3" type="cond" truecount="1" falsecount="0"/>
         <line num="427" count="8750" type="stmt"/>
@@ -2056,7 +2056,7 @@
         <line num="2030" count="49309" type="stmt"/>
         <line num="2031" count="49309" type="stmt"/>
         <line num="2032" count="49309" type="cond" truecount="1" falsecount="0"/>
-        <line num="2033" count="59187" type="cond" truecount="1" falsecount="0"/>
+        <line num="2033" count="59186" type="cond" truecount="1" falsecount="0"/>
         <line num="2034" count="49286" type="stmt"/>
         <line num="2035" count="49286" type="stmt"/>
         <line num="2036" count="49286" type="stmt"/>
@@ -2091,13 +2091,13 @@
         <line num="2065" count="3" type="stmt"/>
       </file>
       <file name="messages.ts" path="/Users/tanghaibo/Projects/typescript/remote-import/src/eval/interpreter/messages.ts">
-        <metrics statements="47" coveredstatements="40" conditionals="7" coveredconditionals="7" methods="7" coveredmethods="0"/>
-        <line num="1" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="2" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="3" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="4" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="5" count="0" type="cond" truecount="1" falsecount="0"/>
-        <line num="6" count="0" type="cond" truecount="1" falsecount="0"/>
+        <metrics statements="47" coveredstatements="46" conditionals="13" coveredconditionals="13" methods="7" coveredmethods="6"/>
+        <line num="1" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="3" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="7" count="0" type="cond" truecount="1" falsecount="0"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -2151,11 +2151,11 @@
         <line num="7" count="4" type="stmt"/>
         <line num="8" count="4" type="stmt"/>
         <line num="9" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="10" count="4403" type="stmt"/>
-        <line num="11" count="4403" type="stmt"/>
-        <line num="12" count="4403" type="stmt"/>
-        <line num="13" count="4403" type="stmt"/>
-        <line num="14" count="4403" type="stmt"/>
+        <line num="10" count="4407" type="stmt"/>
+        <line num="11" count="4407" type="stmt"/>
+        <line num="12" count="4407" type="stmt"/>
+        <line num="13" count="4407" type="stmt"/>
+        <line num="14" count="4407" type="stmt"/>
         <line num="15" count="4" type="stmt"/>
       </file>
     </package>

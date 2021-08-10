@@ -17,6 +17,7 @@ describe('[EvalScript]', () => {
   it('Basic function definition', () => {
     expect(module.main).toBeDefined();
   });
+
   // 基本加减法运算正常
   it('Basic addition and subtraction operations', async () => {
     expect(module.main()).toBe(3);

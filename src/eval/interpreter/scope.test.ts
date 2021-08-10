@@ -9,5 +9,6 @@ describe('[Scope]', () => {
   const scope = new Scope(child, parent, key);
   it('Scope Data', () => {
     expect(scope.data).toBe(child);
+    expect(scope.parent).toBe(parent);
   });
 });

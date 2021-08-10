@@ -2,6 +2,7 @@ import {Interpreter} from './index';
 import {readFileSync} from 'fs';
 import {resolve} from 'path';
 import jsdom from 'jsdom';
+const dom = new jsdom.JSDOM(`<html><head></head><body></body></html>`);
 
 const func = `
   function main(a, b, c) {
@@ -27,14 +28,14 @@ const open = (file: string): string => {
 
 describe('[Scope]', () => {
   it('Function and param', () => {
-    const interpreter = new Interpreter({});
+    const interpreter = new Interpreter(dom.window);
     interpreter.evaluate(func);
     const module = interpreter.getWindow();
     expect(module.main(1,2,(num: number) => num + 1)).toBe(4);
   });
 
   it('Function error', () => {
-    const interpreter = new Interpreter({});
+    const interpreter = new Interpreter(dom.window);
     interpreter.evaluate(funcError);
     const module = interpreter.getWindow();
     expect(() => module.main()).toThrow('error');
