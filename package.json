@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/tang-haibo/remote-import#readme",
   "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.171",
     "@types/node": "^16.4.13",

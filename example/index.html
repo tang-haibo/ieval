@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开发示例</title>
+  <script src="../lib/imports.js"></script>
+  <script src="../lib/platform/web.js"></script>
+</head>
+<body>
+  <script>
+    var option = {
+      context: new WebContext(),
+    };
+    const resource = [
+      `
+      (function (global, factory) {
+          typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+          typeof define === 'function' && define.amd ? define(factory) :
+          (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.TestMain = factory());
+      }(this, (function () { 'use strict';
+        console.log('测试载入对象');
+        return '123';
+      })));
+      `
+    ];
+    imports.ImportScript(resource, option).then((ctx) => {
+      const module = ctx.getWindow();
+    });
+  </script>
+</body>
+</html>

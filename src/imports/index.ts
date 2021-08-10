@@ -13,18 +13,15 @@ export async function loadToAst(
 ): Promise<ScriptsEmtry[]> {
   return Promise.all(scripts.map(item => {
     if(isNetworkUrl(item)) {
-      return getResource(String(item), option).then((data: string) => parser(data));
+      return getResource(String(item), option);
     }
     if(isString(item)) {
-      return Promise.resolve(parser(String(item)));
+      return Promise.resolve(String(item));
     }
     if(isPromise(item)) {
-      return (item as Promise<string>).then((data: string) => parser(data));
+      return (item as Promise<string>);
     }
-    if(isAst(item)) {
-      return item;
-    }
-    return {};
+    return '';
   }));
 }
 

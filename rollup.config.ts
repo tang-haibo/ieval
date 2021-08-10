@@ -1,12 +1,14 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript';
+import json from '@rollup/plugin-json';
 import pkg from './package.json';
 
-const plugins = [ // 打包插件
-  resolve(), // 查找和打包node_modules中的第三方模块
-  commonjs(), // 将 CommonJS 转换成 ES2015 模块供 Rollup 处理
-  typescript() // 解析 TypeScript
+const plugins = [
+  resolve(),
+  commonjs(),
+  typescript(),
+  json(),
 ];
 
 export default [
@@ -14,7 +16,7 @@ export default [
     input: 'src/index.ts',
     output: {
       file: `${pkg.main}/index.js`,
-      name: pkg.name,
+      name: String(pkg.name).replace(/\-(\w)/g, (str: string, $1: string) => String($1).toUpperCase()),
       format: 'umd',
     },
     plugins
@@ -23,7 +25,7 @@ export default [
     input: 'src/parser/index.ts',
     output: {
       file: `${pkg.main}/parser.js`,
-      name: pkg.main,
+      name: 'parser',
       format: 'umd',
     },
     plugins
@@ -32,7 +34,7 @@ export default [
     input: 'src/imports/index.ts',
     output: {
       file: `${pkg.main}/imports.js`,
-      name: pkg.main,
+      name: 'imports',
       format: 'umd',
     },
     plugins
@@ -41,7 +43,25 @@ export default [
     input: 'src/eval/index.ts',
     output: {
       file: `${pkg.main}/eval.js`,
-      name: pkg.main,
+      name: 'EvalScript',
+      format: 'umd',
+    },
+    plugins
+  },
+  {
+    input: 'src/platform/wechat.ts',
+    output: {
+      file: `${pkg.main}/platform/wechat.js`,
+      name: 'WeChatContext',
+      format: 'umd',
+    },
+    plugins
+  },
+  {
+    input: 'src/platform/web.ts',
+    output: {
+      file: `${pkg.main}/platform/web.js`,
+      name: 'WebContext',
       format: 'umd',
     },
     plugins

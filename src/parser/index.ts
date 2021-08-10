@@ -9,6 +9,8 @@ import {parse} from 'acorn';
 export function parser (scriptString: string, ecmaVersion: EcmaVersion = 2020): ScriptEmtryAst {
   return parse(scriptString, {
     ecmaVersion,
+    ranges: true,
+		locations: true,
   }) as unknown as ScriptEmtryAst;
 }
 
