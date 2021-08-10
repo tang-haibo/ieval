@@ -1,16 +1,15 @@
 import { EvalScript } from '../eval';
-import { parser } from '../parser';
-import { isPromise, isAst, isString, isNetworkUrl } from '../utils';
+import { isPromise, isString, isNetworkUrl } from '../utils';
 
 // 各端实现不一致，这里实现被忽略
 export function getResource (url: string, option: ContextOption): Promise<string> {
   return option.get(url);
 }
 
-export async function loadToAst(
+export async function loadCode(
   scripts: ScriptsEmtry[],
   option: ContextOption,
-): Promise<ScriptsEmtry[]> {
+): Promise<string[]> {
   return Promise.all(scripts.map(item => {
     if(isNetworkUrl(item)) {
       return getResource(String(item), option);
@@ -30,8 +29,8 @@ export async function ImportScript(
   scripts: ScriptsEmtry[],
   option: ContextOption,
 ): Promise<RuntimeContext> {
-  const ast = await loadToAst(scripts, option);
+  const code = await loadCode(scripts, option);
   // 执行
   const context = option.context;
-  return EvalScript(ast, context);
+  return EvalScript(code, context);
 }

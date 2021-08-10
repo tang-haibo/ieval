@@ -8,8 +8,9 @@ import {
 	InterruptThrowSyntaxError,
 } from "./messages";
 import { Node, ESTree } from "./nodes";
+import pkg from '../../../package.json';
 
-const version = "%VERSION%";
+const version = pkg.version;
 
 /////////types/////////
 type Getter = () => any;
@@ -279,7 +280,7 @@ export class Interpreter {
 	static readonly version: string = version;
 	static readonly eval = internalEval;
 	static readonly Function = internalFunction;
-	static ecmaVersion: ECMA_VERSION = 5;
+	static ecmaVersion: ECMA_VERSION = 3;
 	// alert.call(globalContextInFunction, 1);
 	// fix: alert.call({}, 1); // Illegal invocation
 	// function func(){
@@ -442,10 +443,6 @@ export class Interpreter {
 		});
 
 		return this.evaluateNode(node as ESTree.Program, code);
-	}
-
-	appendCode(code: string) {
-		return this.evaluate(code);
 	}
 
 	protected evaluateNode(node: ESTree.Program, source: string = "") {

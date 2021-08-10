@@ -1,4 +1,4 @@
-import {getResource, loadToAst} from './index';
+import {getResource, loadCode, ImportScript} from './index';
 import http from 'https';
 
 const option = {
@@ -23,181 +23,53 @@ const option = {
       });
     });
   },
-  context: {},
+  context: global,
 };
 
-// 对应的ast对象
-const initAst = {
-  "type": "Program",
-  "body": [
-    {
-      "type": "FunctionDeclaration",
-      "id": {
-        "type": "Identifier","name": "main"
-      },
-      "expression": false,
-      "generator": false,
-      "async": false,
-      "params": [
-        {
-          "type": "Identifier",
-          "name": "c"
-        }
-      ],
-      "body": {
-        "type": "BlockStatement",
-        "body": [
-          {
-            "type": "VariableDeclaration",
-            
-            
-            "declarations": [
-              {
-                "type": "VariableDeclarator",
-                
-                
-                "id": {
-                  "type": "Identifier",
-                  
-                  
-                  "name": "a"
-                },
-                "init": {
-                  "type": "Literal",
-                  
-                  
-                  "value": 1,
-                  "raw": "1"
-                }
-              }
-            ],
-            "kind": "var"
-          },
-          {
-            "type": "VariableDeclaration",
-            
-            
-            "declarations": [
-              {
-                "type": "VariableDeclarator",
-                
-                
-                "id": {
-                  "type": "Identifier",
-                  
-                  
-                  "name": "b"
-                },
-                "init": {
-                  "type": "Literal",
-                  
-                  
-                  "value": 2,
-                  "raw": "2"
-                }
-              }
-            ],
-            "kind": "var"
-          },
-          {
-            "type": "ReturnStatement",
-            
-            
-            "argument": {
-              "type": "BinaryExpression",
-              
-              
-              "left": {
-                "type": "BinaryExpression",
-                
-                
-                "left": {
-                  "type": "Identifier",
-                  
-                  
-                  "name": "a"
-                },
-                "operator": "+",
-                "right": {
-                  "type": "Identifier",
-                  
-                  
-                  "name": "b"
-                }
-              },
-              "operator": "+",
-              "right": {
-                "type": "Identifier",
-                
-                
-                "name": "c"
-              }
-            }
-          }
-        ]
-      }
-    }
-  ],
-  "sourceType": "script"
-};
+function isString(response: ScriptsEmtry) {
+  expect(typeof response).toContain('string');
+  expect((response as string).length).toBeGreaterThan(0);
+}
 
-// 本地代码测试
-const code = `
-  function main(c) {
-    var a = 1;
-    var b = 2;
-    return a + b + c;
-  }
-`;
-
-// 请求是否异常
 describe('[getResource]', () => {
   it('[getResource] is response 200 and text is string', async () => {
     const response = await getResource('https://www.baidu.com', option);
-    expect(typeof response).toContain('string');
-    expect(response.length).toBeGreaterThan(0);
+    isString(response);
   });
 });
 
-// 格式化是否异常
-describe('[ImportScript]', () => {
-  it('[ImportScript] load local code is string to Ast', async () => {
-    // 本地代码测试
-    const code = `
-      function main(c) {
-        var a = 1;
-        var b = 2;
-        return a + b + c;
-      }
-    `;
-    const [localAst] = await loadToAst([code], option);
-    expect(localAst).toMatchObject(initAst);
-  });
-
-  it('[ImportScript] load local ast is string to Ast', async () => {
-    const [localAst] = await loadToAst([initAst], option);
-    expect(localAst).toMatchObject(initAst);
-  });
-
-  it('[ImportScript] load Promise code is string to Ast', async () => {
-    const [localAst] = await loadToAst([
-      // promise 对象加载
-      new Promise(resolve => {
-        setTimeout(() => {
-          resolve(code);
-        }, 200);
-      })
-    ], option);
-    expect(localAst).toMatchObject(initAst);
-  });
-
-  it('[ImportScript] load null is string to Ast', async () => {
-    const [localAst] = await loadToAst([null], option);
-    expect(localAst).toMatchObject({});
+describe('[loadCode]', () => {
+  it('[loadCode] params is string', async () => {
+    const [response] = await loadCode([`function main() {}`], option);
+    isString(response);
   });
   
-  it('[ImportScript] remote is string to Ast', async () => {
-    const [loadAst] = await loadToAst(['https://raw.githubusercontent.com/tang-haibo/remote-import/master/example/imports.js'], option);
-    expect(loadAst).toMatchObject(initAst);
-  }, 30000);
+  it('[loadCode] params is Promise', async () => {
+    const [response] = await loadCode([Promise.resolve(`function main() {}`)], option);
+    isString(response);
+  });
+
+  it('[loadCode] params is Uri', async () => {
+    const [response] = await loadCode(['https://www.42bk.com'], option);
+    isString(response);
+  });
+
+  it('[loadCode] params is null', async () => {
+    const [response] = await loadCode([null], option);
+    expect(typeof response).toContain('string');
+    expect(response.length).toBe(0);
+  });
+});
+
+
+describe('[ImportScript]', () => {
+  it('[ImportScript] params is Function', async () => {
+    const ctx = await ImportScript([
+      `function main() {
+        return 0;
+      }`
+    ], option);
+    const module = ctx.getWindow();
+    expect(module.main()).toBe(0);
+  });
 });
