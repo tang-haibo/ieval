@@ -5,13 +5,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>开发示例</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script src="../lib/imports.js"></script>
   <script src="../lib/platform/web.js"></script>
 </head>
 <body>
+  <div id="main" style="width: 100%; height: 100%; "></div>
   <script>
     var option = {
-      context: new WebContext(),
+      context: window,
+      // 浏览器请求方法
+      get: (url) => {
+        return axios.get(url).then(info => info.data);
+      },
     };
     const resource = [
       `
@@ -20,13 +26,33 @@
           typeof define === 'function' && define.amd ? define(factory) :
           (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.TestMain = factory());
       }(this, (function () { 'use strict';
-        console.log('测试载入对象');
         return '123';
       })));
-      `
+      `,
+      'https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.common.min.js',
     ];
     imports.ImportScript(resource, option).then((ctx) => {
+      // 获取浏览器窗口
       const module = ctx.getWindow();
+      const echarts = module.echarts;
+      var chartDom = document.getElementById('main');
+      var myChart = echarts.init(chartDom);
+      var option;
+      option = {
+          xAxis: {
+              type: 'category',
+              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data: [150, 230, 224, 218, 135, 147, 260],
+              type: 'line'
+          }]
+      };
+
+      option && myChart.setOption(option);
     });
   </script>
 </body>

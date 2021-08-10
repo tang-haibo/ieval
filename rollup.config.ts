@@ -57,13 +57,4 @@ export default [
     },
     plugins
   },
-  {
-    input: 'src/platform/web.ts',
-    output: {
-      file: `${pkg.main}/platform/web.js`,
-      name: 'WebContext',
-      format: 'umd',
-    },
-    plugins
-  },
 ]; 
