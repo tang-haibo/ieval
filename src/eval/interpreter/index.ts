@@ -1,4 +1,6 @@
-import { parse } from "acorn";
+// 与babel保持一致, 使用babel处理后规范的优势在于后续可以编译mini版本配合babel ast 将代码存储为ast格式调用，优化parser大小与执行时间
+// import { parse } from "acorn";
+import {parse} from '@babel/parser';
 import {Scope} from './scope';
 import {
 	Messages,
@@ -7,7 +9,7 @@ import {
 	InterruptThrowReferenceError,
 	InterruptThrowSyntaxError,
 } from "./messages";
-import { Node, ESTree } from "./nodes";
+import { Node, ESTree, BabelNode, BaseLiteral, NullLiteral, FileNode, RegExpLiteral } from "./nodes";
 import pkg from '../../../package.json';
 
 const version = pkg.version;
@@ -438,10 +440,9 @@ export class Interpreter {
 
 		node = parse(code, {
 			ranges: true,
-			locations: true,
-			ecmaVersion: this.options.ecmaVersion || Interpreter.ecmaVersion,
+			// locations: true,
+			// ecmaVersion: this.options.ecmaVersion || Interpreter.ecmaVersion,
 		});
-
 		return this.evaluateNode(node as ESTree.Program, code);
 	}
 
@@ -520,9 +521,9 @@ export class Interpreter {
 	protected createInternalThrowError<T extends MessageItem>(
 		msg: T,
 		value: string | number,
-		node?: Node | null
+		node?: Node | BabelNode | null 
 	) {
-		return this.createError(this.createErrorMessage(msg, value, node), msg[2]);
+		return this.createError(this.createErrorMessage(msg, value, node as Node), msg[2]);
 	}
 
 	protected checkTimeout() {
@@ -546,11 +547,36 @@ export class Interpreter {
 
 		return "";
 	}
-
-	protected createClosure(node: Node): BaseClosure {
+	protected nullLiteral(_node: NullLiteral) {
+		return () => {
+			return null;
+		}
+	}
+	protected baseLiteral(node: BaseLiteral) {
+		return () => {
+			return this.getLiteralValue(node);
+		}
+	}
+	protected regExpLiteral(node: RegExpLiteral) {
+		return () => {
+			return new RegExp(node.pattern, node?.flags);
+		}
+	}
+	protected createClosure(node: Node | BabelNode): BaseClosure {
 		let closure: BaseClosure;
-
 		switch (node.type) {
+			case "RegExpLiteral":
+				closure = this.regExpLiteral(node);
+				break;
+			case "NumericLiteral":
+			case "StringLiteral":
+				closure = this.baseLiteral(node);
+				break;
+			case "NullLiteral":
+				closure = this.nullLiteral(node);
+				break;
+			case "File":
+				return this.createClosure(node.program);
 			case "BinaryExpression":
 				closure = this.binaryExpressionHandler(node);
 				break;
@@ -668,7 +694,7 @@ export class Interpreter {
 				throw this.createInternalThrowError(Messages.ExecutionTimeOutError, timeout, null);
 			}
 
-			this.lastExecNode = node;
+			this.lastExecNode = node as Node;
 
 			return closure(...args);
 		};
@@ -851,9 +877,27 @@ export class Interpreter {
 			}
 		};
 	}
-
+	protected isLiteral(type: string) {
+		return type === 'RegExpLiteral' ||
+			type === 'NumericLiteral' ||
+			type === 'StringLiteral' ||
+			type === 'Literal';
+	}
+	protected getLiteralValue(keyNode: BaseLiteral) {
+		if(keyNode?.extra?.rawValue !== undefined) {
+			return keyNode?.extra?.rawValue;
+		}
+		if(keyNode?.extra?.raw !== undefined) {
+			return keyNode?.extra?.raw;
+		}
+		if(keyNode?.init.value !== undefined) {
+			return keyNode?.init.value;
+		}
+		return keyNode?.value;
+	}
 	// var o = {a: 1, b: 's', get name(){}, set name(){}  ...}
 	protected objectExpressionHandler(node: ESTree.ObjectExpression) {
+		const self = this;
 		const items: {
 			key: string;
 			property: ESTree.Property;
@@ -863,10 +907,14 @@ export class Interpreter {
 			if (keyNode.type === "Identifier") {
 				// var o = {a:1}
 				return keyNode.name;
-			} else if (keyNode.type === "Literal") {
+			}
+			// else if (keyNode.type === "Literal") {
+			else if (self.isLiteral(keyNode.type)) {
 				// var o = {"a":1}
-				return keyNode.value as string;
-			} else {
+				// return keyNode.value as string;
+				return String(self.getLiteralValue(keyNode as any));
+			}
+			else {
 				return this.throwError(Messages.ObjectStructureSyntaxError, keyNode.type, keyNode);
 			}
 		}
@@ -878,16 +926,15 @@ export class Interpreter {
 				set?: BaseClosure;
 			};
 		} = Object.create(null);
-
+		
 		node.properties.forEach((property) => {
       const prop = property as ESTree.Property;
-			const kind = prop.kind;
+			// 'init' 兼容babel/parser
+			const kind = prop.kind || 'init';
 			const key = getKey(prop.key);
-
 			if (!properties[key] || kind === "init") {
 				properties[key] = {};
 			}
-
 			properties[key][kind] = this.createClosure(prop.value);
 
 			items.push({
@@ -1241,7 +1288,6 @@ export class Interpreter {
 					...args.map(arg => arg())
 				);
 			}
-
 			return new construct(...args.map(arg => arg()));
 		};
 	}
@@ -1253,7 +1299,9 @@ export class Interpreter {
 		return () => {
 			const obj = objectGetter();
 			let key = keyGetter();
-
+			// if(obj === undefined) {
+			// 	console.log(node, obj, key);
+			// }
 			return obj[key];
 		};
 	}
@@ -1288,7 +1336,6 @@ export class Interpreter {
 			if (node.regex) {
 				return new RegExp(node.regex.pattern, node.regex.flags);
 			}
-
 			return node.value;
 		};
 	}
@@ -1300,7 +1347,6 @@ export class Interpreter {
 			const data = this.getScopeDataFromName(node.name, currentScope);
 
 			this.assertVariable(data, node.name, node);
-
 			return data[node.name];
 		};
 	}
@@ -1336,7 +1382,6 @@ export class Interpreter {
 			const data = dataGetter();
 			const name = nameGetter();
 			const rightValue = rightValueGetter();
-
 			if (node.operator !== "=") {
 				// if a is undefined
 				// a += 1

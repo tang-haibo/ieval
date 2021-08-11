@@ -57,6 +57,66 @@ describe('[Scope]', () => {
     expect(module.main(1,2)).toBe(3);
   });
 
+  it('new Function funcLogicalExpression', () => {
+    const interpreter = new Interpreter({}, {
+      rootContext: {},
+    });
+    interpreter.setExecTimeout(1000);
+    interpreter.evaluate(`
+      var main = new Function("a", "b", "return a + b;");
+    `);
+    expect(interpreter.getExecutionTime()).toBeLessThan(200);
+    const module = interpreter.getWindow();
+    expect(module.main(1,2)).toBe(3);
+  });
+
+  it('WithStatement', () => {
+    const interpreter = new Interpreter({});
+    interpreter.evaluate(`
+        var a, x, y;
+        var r = 10;
+        with (Math) {
+          a = PI * r * r;
+          x = r * cos(PI);
+          y = r * sin(PI / 2);
+        }
+    `);
+  });
+
+  it('debug', () => {
+    const interpreter = new Interpreter({});
+    interpreter.evaluate(`
+        function main() {
+          debug;
+        }
+    `);
+  });
+
+
+  it('operation', () => {
+    const interpreter = new Interpreter({});
+    interpreter.evaluate(`
+      function main1() {
+        var a = 10;
+        var b = 20;
+        return a <= b;
+      }
+      function main2() {
+        return 1 >> 1;
+      }
+      function main3() {
+        return 1 >>> 1;
+      }
+      function main4() {
+        return 3 ** 4;
+      }
+    `);
+    const module = interpreter.getWindow();
+    expect(module.main1()).toBe(true);
+    expect(module.main2()).toBe(0);
+    expect(module.main3()).toBe(0);
+  });
+
   it('echarts lib', () => {
     const interpreter = new Interpreter({});
     interpreter.evaluate(open('../../../example/echart.js'));
