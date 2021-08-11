@@ -566,7 +566,7 @@ export class Interpreter {
 			return new RegExp(node.pattern, node?.flags);
 		}
 	}
-
+	
 	protected createClosure(node: Node | BabelNode): BaseClosure {
 		let closure: BaseClosure;
 		switch (node.type) {

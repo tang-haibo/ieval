@@ -9,7 +9,7 @@ export function getResource (url: string, option: ContextOption): Promise<string
 export async function loadCode(
   scripts: ScriptsEmtry[],
   option: ContextOption,
-): Promise<any[]> {
+): Promise<string[]> {
   return Promise.all(scripts.map(item => {
     if(isNetworkUrl(item)) {
       return getResource(String(item), option);
@@ -20,7 +20,8 @@ export async function loadCode(
     if(isPromise(item)) {
       return (item as Promise<string>);
     }
-    return item;
+    console.error(`输入类型应为 Promise String 或资源地址`);
+    return '';
   }));
 }
 
