@@ -9,7 +9,7 @@ export function getResource (url: string, option: ContextOption): Promise<string
 export async function loadCode(
   scripts: ScriptsEmtry[],
   option: ContextOption,
-): Promise<string[]> {
+): Promise<any[]> {
   return Promise.all(scripts.map(item => {
     if(isNetworkUrl(item)) {
       return getResource(String(item), option);
@@ -20,7 +20,7 @@ export async function loadCode(
     if(isPromise(item)) {
       return (item as Promise<string>);
     }
-    return '';
+    return item;
   }));
 }
 

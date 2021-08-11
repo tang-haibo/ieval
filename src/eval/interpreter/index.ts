@@ -433,16 +433,20 @@ export class Interpreter {
 		this.currentScope = scope;
 	}
 
-	evaluate(code: string = "") {
+	evaluate(code: string | object = "") {
 		let node: unknown;
 
 		if (!code) return;
-
-		node = parse(code, {
-			ranges: true,
-			// locations: true,
-			// ecmaVersion: this.options.ecmaVersion || Interpreter.ecmaVersion,
-		});
+		
+		if(typeof code === 'string') {
+			node = parse(String(code), {
+				ranges: true,
+			});
+		} else {
+			node = code;
+			code = JSON.stringify(code);
+		}
+		console.log(node, 111);
 		return this.evaluateNode(node as ESTree.Program, code);
 	}
 
@@ -562,6 +566,7 @@ export class Interpreter {
 			return new RegExp(node.pattern, node?.flags);
 		}
 	}
+
 	protected createClosure(node: Node | BabelNode): BaseClosure {
 		let closure: BaseClosure;
 		switch (node.type) {
