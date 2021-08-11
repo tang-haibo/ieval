@@ -20,8 +20,7 @@ export async function loadCode(
     if(isPromise(item)) {
       return (item as Promise<string>);
     }
-    console.error(`输入类型应为 Promise String 或资源地址`);
-    return '';
+    throw Error(`输入类型应为 Promise String 或资源地址`);
   }));
 }
 

@@ -1,4 +1,4 @@
-import {Interpreter} from './index';
+import {Interpreter, internalEval, InternalInterpreterReflection} from './index';
 import {readFileSync} from 'fs';
 import {resolve} from 'path';
 import jsdom from 'jsdom';
@@ -51,8 +51,17 @@ describe('[Scope]', () => {
   it('Eval Function funcLogicalExpression', () => {
     const interpreter = new Interpreter({});
     interpreter.evaluate(`
-      eval("function main(a,b) { return a + b; }")
+      eval("function main(a,b) { return a + b; }");
+      eval("");
+      eval("var a = 1;", false);
     `);
+    try {
+      interpreter.evaluate(`
+        eval("aaa()");
+      `);
+      internalEval(0 as unknown as InternalInterpreterReflection);
+    } catch(e) {
+    }
     const module = interpreter.getWindow();
     expect(module.main(1,2)).toBe(3);
   });
@@ -117,6 +126,7 @@ describe('[Scope]', () => {
     expect(module.main3()).toBe(0);
     expect(module.main4()).toBe(81);
   });
+
 
   it('echarts lib', () => {
     const interpreter = new Interpreter({});

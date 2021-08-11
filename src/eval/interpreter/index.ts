@@ -77,7 +77,7 @@ interface GeneratorReflection {
 	getExecStartTime(): number;
 }
 
-class InternalInterpreterReflection {
+export class InternalInterpreterReflection {
 	protected interpreter: Interpreter;
 	constructor(interpreter: Interpreter) {
 		this.interpreter = interpreter;
@@ -108,7 +108,7 @@ class InternalInterpreterReflection {
 	}
 }
 
-function internalEval(
+export function internalEval(
 	reflection: InternalInterpreterReflection,
 	code?: string,
 	useGlobalScope: boolean = true
@@ -446,7 +446,7 @@ export class Interpreter {
 			node = code;
 			code = JSON.stringify(code);
 		}
-		console.log(node, 111);
+		// console.log(node, 111);
 		return this.evaluateNode(node as ESTree.Program, code);
 	}
 

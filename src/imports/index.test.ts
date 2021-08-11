@@ -55,12 +55,9 @@ describe('[loadCode]', () => {
   });
 
   it('[loadCode] params is null', async () => {
-    const [response] = await loadCode([null], option);
-    expect(typeof response).toContain('string');
-    expect(response.length).toBe(0);
+    await expect(loadCode([null], option)).rejects.toThrow(Error);
   });
 });
-
 
 describe('[ImportScript]', () => {
   it('[ImportScript] params is Function', async () => {

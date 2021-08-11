@@ -1,4 +1,4 @@
-import {ThrowError, ThrowSyntaxError, ThrowReferenceError, ThrowTypeError, InterruptThrowError, InterruptThrowSyntaxError, } from './messages';
+import {ThrowError, ThrowSyntaxError, ThrowReferenceError, ThrowTypeError, InterruptThrowError, InterruptThrowSyntaxError, InterruptThrowReferenceError, } from './messages';
 
 describe('[ThrowError]', () => {
   it('[ThrowError]', () => {
@@ -33,5 +33,11 @@ describe('[InterruptThrowError]', () => {
 describe('[InterruptThrowSyntaxError]', () => {
   it('[InterruptThrowSyntaxError]', () => {
     expect(() => { throw new InterruptThrowSyntaxError() }).toThrow(SyntaxError);
+  });
+});
+
+describe('[InterruptThrowReferenceError]', () => {
+  it('[InterruptThrowReferenceError]', () => {
+    expect(() => { throw new InterruptThrowReferenceError() }).toThrow(ReferenceError);
   });
 });
