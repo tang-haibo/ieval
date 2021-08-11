@@ -612,7 +612,7 @@ export class Interpreter {
 				break;
 			case "BooleanLiteral":
 			case "Literal":
-				closure = this.literalHandler(node);
+				closure = this.literalHandler(node as any);
 				break;
 			case "Identifier":
 				closure = this.identifierHandler(node);

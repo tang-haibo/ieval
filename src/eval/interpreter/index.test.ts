@@ -115,6 +115,7 @@ describe('[Scope]', () => {
     expect(module.main1()).toBe(true);
     expect(module.main2()).toBe(0);
     expect(module.main3()).toBe(0);
+    expect(module.main4()).toBe(81);
   });
 
   it('echarts lib', () => {
@@ -122,6 +123,13 @@ describe('[Scope]', () => {
     interpreter.evaluate(open('../../../example/echart.js'));
     const module = interpreter.getWindow();
     expect(module.echarts).toBeDefined();
+  });
+
+  it('vue lib', () => {
+    const interpreter = new Interpreter({});
+    interpreter.evaluate(open('../../../example/vue.js'));
+    const module = interpreter.getWindow();
+    expect(module.Vue).toBeDefined();
   });
 
   it('jquery lib', () => {
