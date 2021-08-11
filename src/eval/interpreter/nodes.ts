@@ -18,7 +18,7 @@ export interface RegExpLiteral extends ESTree.BaseExpression {
 	flags?: string;
 }
 export interface BaseLiteral extends ESTree.BaseExpression {
-	type: "NumericLiteral" | "StringLiteral",
+	type: "NumericLiteral" | "StringLiteral" | "BooleanLiteral",
 	value?: BaseData;
 	extra?: {
 		raw?: BaseData;

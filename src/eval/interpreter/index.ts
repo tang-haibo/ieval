@@ -610,6 +610,7 @@ export class Interpreter {
 			case "SequenceExpression":
 				closure = this.sequenceExpressionHandler(node);
 				break;
+			case "BooleanLiteral":
 			case "Literal":
 				closure = this.literalHandler(node);
 				break;
