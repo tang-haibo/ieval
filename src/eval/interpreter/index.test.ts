@@ -48,6 +48,15 @@ describe('[Scope]', () => {
     expect(module.main(1, 2)).toBe(1);
   });
 
+  it('Eval Function funcLogicalExpression', () => {
+    const interpreter = new Interpreter({});
+    interpreter.evaluate(`
+      eval("function main(a,b) { return a + b; }")
+    `);
+    const module = interpreter.getWindow();
+    expect(module.main(1,2)).toBe(3);
+  });
+
   it('echarts lib', () => {
     const interpreter = new Interpreter({});
     interpreter.evaluate(open('../../../example/echart.js'));

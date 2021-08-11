@@ -11,15 +11,15 @@ const code = `
 `;
 
 describe('[EvalScript]', () => {
-  const ctx = EvalScript([code], {});
-  const module = ctx.getWindow();
-
   it('Basic function definition', () => {
+    const ctx = EvalScript([code], {});
+    const module = ctx.getWindow();
     expect(module.main).toBeDefined();
+    expect(module.main()).toBe(3);
   });
 
-  // 基本加减法运算正常
-  it('Basic addition and subtraction operations', async () => {
-    expect(module.main()).toBe(3);
+  it('param validator', () => {
+    const ctx = EvalScript(['']);
+    expect(ctx.context).toEqual({});
   });
 });

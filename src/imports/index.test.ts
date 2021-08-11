@@ -50,7 +50,7 @@ describe('[loadCode]', () => {
   });
 
   it('[loadCode] params is Uri', async () => {
-    const [response] = await loadCode(['https://www.42bk.com'], option);
+    const [response] = await loadCode(['https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png'], option);
     isString(response);
   });
 
