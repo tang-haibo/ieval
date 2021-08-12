@@ -149,7 +149,7 @@ Object.defineProperty(internalEval, "__IS_EVAL_FUNC", {
 	configurable: false,
 });
 
-function internalFunction(
+export function internalFunction(
 	reflection: InternalInterpreterReflection,
 	...params: string[]
 ): (...args: any[]) => any {
