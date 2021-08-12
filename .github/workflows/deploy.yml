@@ -15,12 +15,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install
-        run: npm install
-      - name: test
-        run: npm run test
-      - name: report
+      - run: npm install
+      - run: npm run test
+      - run: npm run coverage
         env:
           COVERALLS_REPO_TOKEN: ${{ coverage.COVERALLS_REPO_TOKEN }}
-        run: npm run coverage
 
