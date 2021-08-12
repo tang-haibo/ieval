@@ -1,7 +1,0 @@
-language: node_js
-node_js:
-  - "14"
-sudo: required
-script:
-    - npm install
-    - npm run test && npm run coverage && npm run release
