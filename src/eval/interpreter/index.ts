@@ -909,7 +909,7 @@ export class Interpreter {
 			property: ESTree.Property;
 		}[] = [];
 
-		function getKey(this: any, keyNode: ESTree.Expression | ESTree.PrivateIdentifier): string {
+		function getKey(this: any, keyNode: ESTree.Expression | any): string {
 			if (keyNode.type === "Identifier") {
 				// var o = {a:1}
 				return keyNode.name;
