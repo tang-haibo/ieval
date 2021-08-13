@@ -433,7 +433,7 @@ export class Interpreter {
 		this.currentScope = scope;
 	}
 
-	evaluate(code: string | ParseResult<File> = "") {
+	evaluate(code: string | ParseResult<FileNode> = "") {
 		let node: unknown;
 
 		if (!code) return;

@@ -5,7 +5,7 @@ export { ESTree };
 export interface File {
   type: "Program";
   sourceType: "script" | "module";
-  body: Array<ESTree.Directive | ESTree.Statement | ESTree.ModuleDeclaration>;
+  body: Array<ESTree.Statement | ESTree.ModuleDeclaration>;
   comments?: Array<ESTree.Comment> | undefined;
 	loc: any;
 

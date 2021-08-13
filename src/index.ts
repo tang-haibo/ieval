@@ -1,6 +1,6 @@
 import { ParseResult } from '@babel/parser';
 import {EvalScript} from './eval';
-import { File, Node } from './eval/interpreter/nodes';
+import { File, FileNode, Node } from './eval/interpreter/nodes';
 import { isJSON, isNetworkUrl, isString } from './utils';
 
 enum CodeType {
@@ -9,12 +9,11 @@ enum CodeType {
   AST = 3,
 }
 class CodeBlock {
-  public value: string | ParseResult<File> = '';
+  public value: string | ParseResult<FileNode> = '';
   private _loaded: boolean = false;
   protected type: CodeType = 1;
-  protected code: string | ParseResult<File> = '';
   protected resolves: Array<(value: unknown) => void> = [];
-  constructor(type: CodeType, value: string | ParseResult<File>) {
+  constructor(type: CodeType, value: string | ParseResult<FileNode>) {
     this.type = type;
     if(type === CodeType.NETWORK) {
       if(request === null) {
@@ -75,7 +74,7 @@ class DocumentEval {
     this.resouces.push(new CodeBlock(CodeType.NETWORK, url));
   }
   // 载入Ast
-  appendAst(ast: ParseResult<File>) {
+  appendAst(ast: ParseResult<FileNode>) {
     this.resouces.push(new CodeBlock(CodeType.AST, ast));
   }
   // 确保资源全部加载完成
@@ -90,7 +89,8 @@ class DocumentEval {
   }
 }
 
-function iEval(resouces: Array<string | ParseResult<File>>, context: RuntimeContext) {
+// 每次加载一个ieval对象
+function iEval(resouces: Array<string | ParseResult<FileNode>>, context: RuntimeContext) {
   const documentEval = new DocumentEval(context);
   // 代码由上至下注入
   resouces.forEach(resouce => {
@@ -99,9 +99,10 @@ function iEval(resouces: Array<string | ParseResult<File>>, context: RuntimeCont
     } else if (isNetworkUrl(resouce)) {
       documentEval.appendUrl(resouce as string);
     } else if (isJSON(resouce)) {
-      documentEval.appendAst(resouce as ParseResult<File>);
+      documentEval.appendAst(resouce as ParseResult<FileNode>);
     }
   });
+  return documentEval;
 }
 
 // 设置代码拉取函数

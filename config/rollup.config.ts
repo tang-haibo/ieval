@@ -16,7 +16,7 @@ export default [
     input: 'src/index.ts',
     output: {
       file: `${pkg.main}/index.js`,
-      name: String(pkg.name).replace(/\-(\w)/g, (str: string, $1: string) => String($1).toUpperCase()),
+      name: 'iEval',
       format: 'umd',
     },
     plugins
