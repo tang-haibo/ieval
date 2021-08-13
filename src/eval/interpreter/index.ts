@@ -1,6 +1,6 @@
 // 与babel保持一致, 使用babel处理后规范的优势在于后续可以编译mini版本配合babel ast 将代码存储为ast格式调用，优化parser大小与执行时间
 // import { parse } from "acorn";
-import {parse} from '@babel/parser';
+import {parse, ParseResult} from '@babel/parser';
 import {Scope} from './scope';
 import {
 	Messages,
@@ -9,7 +9,7 @@ import {
 	InterruptThrowReferenceError,
 	InterruptThrowSyntaxError,
 } from "./messages";
-import { Node, ESTree, BabelNode, BaseLiteral, NullLiteral, FileNode, RegExpLiteral } from "./nodes";
+import { Node, ESTree, BabelNode, BaseLiteral, NullLiteral, FileNode, RegExpLiteral, File } from "./nodes";
 import pkg from '../../../package.json';
 
 const version = pkg.version;
@@ -433,7 +433,7 @@ export class Interpreter {
 		this.currentScope = scope;
 	}
 
-	evaluate(code: string | object = "") {
+	evaluate(code: string | ParseResult<File> = "") {
 		let node: unknown;
 
 		if (!code) return;
@@ -446,7 +446,6 @@ export class Interpreter {
 			node = code;
 			code = JSON.stringify(code);
 		}
-		// console.log(node, 111);
 		return this.evaluateNode(node as ESTree.Program, code);
 	}
 

@@ -20,32 +20,5 @@ export default [
       format: 'umd',
     },
     plugins
-  },
-  {
-    input: 'src/imports/index.ts',
-    output: {
-      file: `${pkg.main}/imports.js`,
-      name: 'imports',
-      format: 'umd',
-    },
-    plugins
-  },
-  {
-    input: 'src/eval/index.ts',
-    output: {
-      file: `${pkg.main}/eval.js`,
-      name: 'EvalScript',
-      format: 'umd',
-    },
-    plugins
-  },
-  {
-    input: 'src/platform/wechat.ts',
-    output: {
-      file: `${pkg.main}/platform/wechat.js`,
-      name: 'WeChatContext',
-      format: 'umd',
-    },
-    plugins
-  },
+  }
 ]; 

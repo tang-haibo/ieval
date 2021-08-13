@@ -6,26 +6,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>开发示例</title>
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
-  <script src="../lib/imports.js"></script>
+  <script src="../lib/index.js"></script>
 </head>
 <body>
   <div id="main" style="height: 400px; "></div>
   <script>
-    var option = {
-      context: window,
-      // 浏览器请求方法
-      get: (url) => {
-        return axios.get(url).then(info => info.data);
-      },
-    };
 
-    const resource = [
-      'https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.common.min.js',
-      'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js',
-    ];
-    imports.iEval(resource, option).then((ctx) => {
-      // 获取浏览器窗口
-      const module = ctx.getWindow();
+    // 请求方法
+    ieval.DocumentEval.setNetwork((url) => {
+      return axios.get(url).then(info => info.data);
+    });
+
+    const documentEval = new ieval.DocumentEval(window);
+
+    documentEval.appendCode(`console.log('正在注入')`);
+    
+    documentEval.appendUrl('https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.common.min.js');
+    
+    documentEval.appendCode({
+      "type": "File",
+      "start": 0,
+      "end": 20,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 20
+        }
+      },
+      "errors": [],
+      "program": {
+        "type": "Program",
+        "start": 0,
+        "end": 20,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 20
+          }
+        },
+        "sourceType": "module",
+        "interpreter": null,
+        "body": [
+          {
+            "type": "ExpressionStatement",
+            "start": 0,
+            "end": 20,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 0
+              },
+              "end": {
+                "line": 1,
+                "column": 20
+              }
+            },
+            "expression": {
+              "type": "CallExpression",
+              "start": 0,
+              "end": 19,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 19
+                }
+              },
+              "callee": {
+                "type": "MemberExpression",
+                "start": 0,
+                "end": 11,
+                "loc": {
+                  "start": {
+                    "line": 1,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "column": 11
+                  }
+                },
+                "object": {
+                  "type": "Identifier",
+                  "start": 0,
+                  "end": 7,
+                  "loc": {
+                    "start": {
+                      "line": 1,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 7
+                    },
+                    "identifierName": "console"
+                  },
+                  "name": "console"
+                },
+                "computed": false,
+                "property": {
+                  "type": "Identifier",
+                  "start": 8,
+                  "end": 11,
+                  "loc": {
+                    "start": {
+                      "line": 1,
+                      "column": 8
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 11
+                    },
+                    "identifierName": "log"
+                  },
+                  "name": "log"
+                }
+              },
+              "arguments": [
+                {
+                  "type": "StringLiteral",
+                  "start": 12,
+                  "end": 18,
+                  "loc": {
+                    "start": {
+                      "line": 1,
+                      "column": 12
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 18
+                    }
+                  },
+                  "extra": {
+                    "rawValue": "结束注入",
+                    "raw": "'结束注入'"
+                  },
+                  "value": "结束注入"
+                }
+              ]
+            }
+          }
+        ],
+        "directives": []
+      },
+      "comments": []
+    });
+
+    async function main() {
+      const module = await documentEval.getWindow();
       const echarts = module.echarts;
       var chartDom = document.getElementById('main');
       var myChart = echarts.init(chartDom);
@@ -43,9 +182,10 @@
               type: 'line'
           }]
       };
-
       option && myChart.setOption(option);
-    });
+    }
+
+    main();
   </script>
 </body>
 </html>
