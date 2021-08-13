@@ -56,7 +56,7 @@ interface RequestInterface {
 }
 
 // 通过network实现的get请求对象
-let request: RequestInterface;
+let request: RequestInterface | null = null;
 
 // 建同一个文档
 class DocumentEval {
