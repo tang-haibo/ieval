@@ -6,6 +6,9 @@
   <a href='https://coveralls.io/github/tang-haibo/remote-import?branch=master'>
     <img src='https://coveralls.io/repos/github/tang-haibo/remote-import/badge.svg?branch=master' alt='Coverage Status' />
   </a>
+  <a href='https://www.npmjs.com/package/ieval'>
+    <img src='https://img.shields.io/npm/v/ieval' alt='ieval version'>
+  </a>
 </h3>
 <p align='center'>
   <a href='README.md'>English</a>
