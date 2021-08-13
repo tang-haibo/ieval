@@ -109,10 +109,10 @@ function iEval(resouces: Array<string | ParseResult<FileNode>>, context: Runtime
   const documentEval = new DocumentEval(context);
   // 代码由上至下注入
   resouces.forEach(resouce => {
-    if(isString(resouce)) {
-      documentEval.appendCode(resouce as string);
-    } else if (isNetworkUrl(resouce)) {
+    if (isNetworkUrl(resouce)) {
       documentEval.appendUrl(resouce as string);
+    } else if(isString(resouce)) {
+      documentEval.appendCode(resouce as string);
     } else if (isJSON(resouce)) {
       documentEval.appendAst(resouce as ParseResult<FileNode>);
     }

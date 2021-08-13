@@ -1,10 +1,12 @@
 // 本地用例测试
-import {DocumentEval, iEval} from './index';
+import {DocumentEval, EvalScript, iEval} from './index';
 import request from 'request';
 
 // 设置请求
 DocumentEval.setNetwork(url => {
-  return new Promise(resolve => request.get(url, resolve));
+  return new Promise(resolve => request.get(url, (_error, _response, data) => {
+    resolve(data);
+  }));
 });
 
 function code() {
@@ -148,6 +150,13 @@ async function toBe(deval: DocumentEval) {
   expect(module.main()).toEqual(10);
 }
 
+describe('EvalScript', () => {
+  it('EvalScript Run', () => {
+    const ctx = EvalScript([code()], {});
+    toBe(ctx as DocumentEval);
+  });
+});
+
 describe("DocumentEval", () => {
   it('test DocumentEval loaded string', async () => {
     const dEval = new DocumentEval({});
@@ -159,10 +168,26 @@ describe("DocumentEval", () => {
     dEval.appendAst(ast() as any);
     await toBe(dEval);
   });
+
+  it('test url', async () => {
+    const dEval = new DocumentEval({});
+    dEval.appendUrl('https://raw.githubusercontent.com/tang-haibo/ieval/master/example/main.js');
+    await toBe(dEval);
+  });
 });
 
 describe("iEval", () => {
-  iEval([
-
-  ], {});
+  it('test eval', async () => {
+    const dEval = iEval([
+      code(),
+      'https://raw.githubusercontent.com/tang-haibo/ieval/master/example/main.js',
+      ast() as any,
+    ], {});
+    await toBe(dEval);
+  });
+  
+  it('test eval null', async () => {
+    iEval.setNetwork(null as any);
+    expect(() => iEval(['https://raw.githubusercontent.com/tang-haibo/ieval/master/example/main.js'], {})).toThrow(Error);
+  });
 });
