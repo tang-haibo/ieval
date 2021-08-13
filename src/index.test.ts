@@ -1,5 +1,11 @@
 // 本地用例测试
 import {DocumentEval, iEval} from './index';
+import request from 'request';
+
+// 设置请求
+DocumentEval.setNetwork(url => {
+  return new Promise(resolve => request.get(url, resolve));
+});
 
 function code() {
   return `
@@ -150,7 +156,7 @@ describe("DocumentEval", () => {
   });
   it('test DocumentEval loaded ast', async () => {
     const dEval = new DocumentEval({});
-    dEval.appendAst(ast());
+    dEval.appendAst(ast() as any);
     await toBe(dEval);
   });
 });

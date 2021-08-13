@@ -1,15 +1,13 @@
 import * as ESTree from "estree";
-
+import {File, Program} from '@babel/types';
 export { ESTree };
 
-export interface File {
-  type: "Program";
-  sourceType: "script" | "module";
-  body: Array<ESTree.Statement | ESTree.ModuleDeclaration>;
-  comments?: Array<ESTree.Comment> | undefined;
-	loc: any;
-
+export interface FileNodeInter extends ESTree.BaseExpression {
+	type: "File",
+	program: File;
 }
+
+export type FileNode = FileNodeInter | File;
 
 type BaseData = number | string | RegExp;
 export interface RegExpLiteral extends ESTree.BaseExpression {
@@ -30,10 +28,6 @@ export interface BaseLiteral extends ESTree.BaseExpression {
 }
 export interface NullLiteral extends ESTree.BaseExpression  {
 	type: "NullLiteral";
-}
-export interface FileNode extends ESTree.BaseExpression {
-	type: "File",
-	program: ESTree.Program;
 }
 export type BabelNode = FileNode | BaseLiteral | NullLiteral | RegExpLiteral;
 export type Node =

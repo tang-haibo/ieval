@@ -1,6 +1,6 @@
 import { ParseResult } from '@babel/parser';
 import {EvalScript} from './eval';
-import { File, FileNode, Node } from './eval/interpreter/nodes';
+import { FileNode } from './eval/interpreter/nodes';
 import { isJSON, isNetworkUrl, isString } from './utils';
 
 enum CodeType {
@@ -9,10 +9,11 @@ enum CodeType {
   AST = 3,
 }
 class CodeBlock {
+  public defined: boolean = false;
   public value: string | ParseResult<FileNode> = '';
   private _loaded: boolean = false;
   protected type: CodeType = 1;
-  protected resolves: Array<(value: unknown) => void> = [];
+  protected resolves: Array<(value: number) => void> = [];
   constructor(type: CodeType, value: string | ParseResult<FileNode>) {
     this.type = type;
     if(type === CodeType.NETWORK) {
@@ -28,6 +29,16 @@ class CodeBlock {
     }
     this.value = value;
     this._loaded = true;
+  }
+  /**
+   * 重复的远程加载
+   * 不应该被继续执行
+   */
+  public setDefined() {
+    if(this.type === CodeType.NETWORK) {
+      return;
+    }
+    this.defined = true;
   }
   public async loaded() {
     return new Promise(resolve => {
@@ -83,8 +94,12 @@ class DocumentEval {
   }
   async getWindow() {
     await this.loaded();
-    // 重建环境重新执行一次
-    this.ctx = EvalScript(this.resouces.map(item => item.value), this.context);
+    // 重建环境重新执行一次(避免再次载入的代码未正确执行)
+    const defineds = this.resouces.filter(item => !item.defined);
+    this.ctx = EvalScript(defineds.map(item => {
+      item.setDefined();
+      return item.value;
+    }), this.context);
     return this.ctx.getWindow();
   }
 }
