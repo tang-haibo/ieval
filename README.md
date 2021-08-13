@@ -3,8 +3,8 @@
   <a href="https://github.com/tang-haibo/remote-import/actions/workflows/deploy.yml/badge.svg">
     <img src="https://github.com/tang-haibo/remote-import/actions/workflows/deploy.yml/badge.svg" alt="Build Status">
   </a>
-  <a href='https://coveralls.io/github/tang-haibo/remote-import?branch=master'>
-    <img src='https://coveralls.io/repos/github/tang-haibo/remote-import/badge.svg?branch=master' alt='Coverage Status' />
+  <a href='https://coveralls.io/github/tang-haibo/ieval'>
+    <img src='https://coveralls.io/repos/github/tang-haibo/ieval/badge.svg' alt='Coverage Status' />
   </a>
   <a href='https://www.npmjs.com/package/ieval'>
     <img src='https://img.shields.io/npm/v/ieval' alt='ieval version'>

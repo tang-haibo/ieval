@@ -1,6 +1,6 @@
 {
   "name": "ieval",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "js在微信小程序等环境实现远程载入其他实现库进行调用",
   "main": "./lib/",
   "miniprogram": "lib",
