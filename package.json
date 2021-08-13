@@ -1,8 +1,9 @@
 {
   "name": "ieval",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "js在微信小程序等环境实现远程载入其他实现库进行调用",
   "main": "./lib/",
+  "miniprogram": "lib",
   "scripts": {
     "dev": "./node_modules/.bin/rollup --config ./config/rollup.config.dev.ts --configPlugin typescript --watch",
     "build": "./node_modules/.bin/rollup --config ./config/rollup.config.prod.ts --configPlugin typescript",
