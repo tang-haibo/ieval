@@ -25,7 +25,7 @@ export async function loadCode(
 }
 
 // 远程代码载入执行
-export async function ImportScript(
+export async function iEval(
   scripts: ScriptsEmtry[],
   option: ContextOption,
 ): Promise<RuntimeContext> {

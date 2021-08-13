@@ -1,14 +1,14 @@
 import {EvalScript} from './eval';
-import {ImportScript, getResource} from './imports';
+import {iEval, getResource} from './imports';
 
 export {
-  ImportScript,
+  iEval,
   EvalScript,
   getResource,
 };
 
 export default {
-  ImportScript,
+  iEval,
   EvalScript,
   getResource,
 };

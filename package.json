@@ -1,6 +1,6 @@
 {
-  "name": "remote-import",
-  "version": "1.0.0",
+  "name": "ieval",
+  "version": "1.0.1",
   "description": "js在微信小程序等环境实现远程载入其他实现库进行调用",
   "main": "./lib/",
   "scripts": {
@@ -10,21 +10,25 @@
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "test": "jest"
   },
+  "files": [
+    "lib",
+    "types",
+    "tsconfig.json"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/tang-haibo/remote-import.git"
+    "url": "https://github.com/tang-haibo/ieval.git"
   },
   "keywords": [
-    "remote-import",
-    "wx-import",
-    "app-import"
+    "ieval",
+    "eval"
   ],
   "author": "tang-haibo",
   "license": "(MIT OR Apache-2.0)",
   "bugs": {
-    "url": "https://github.com/tang-haibo/remote-import/issues"
+    "url": "https://github.com/tang-haibo/ieval/issues"
   },
-  "homepage": "https://github.com/tang-haibo/remote-import#readme",
+  "homepage": "https://github.com/tang-haibo/ieval#readme",
   "devDependencies": {
     "@babel/parser": "^7.15.2",
     "@rollup/plugin-json": "^4.1.0",

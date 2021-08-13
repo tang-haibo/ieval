@@ -23,7 +23,7 @@
       'https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.common.min.js',
       'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js',
     ];
-    imports.ImportScript(resource, option).then((ctx) => {
+    imports.iEval(resource, option).then((ctx) => {
       // 获取浏览器窗口
       const module = ctx.getWindow();
       const echarts = module.echarts;

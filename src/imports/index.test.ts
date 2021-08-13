@@ -1,4 +1,4 @@
-import {getResource, loadCode, ImportScript} from './index';
+import {getResource, loadCode, iEval} from './index';
 import http from 'https';
 
 const option = {
@@ -59,9 +59,9 @@ describe('[loadCode]', () => {
   });
 });
 
-describe('[ImportScript]', () => {
-  it('[ImportScript] params is Function', async () => {
-    const ctx = await ImportScript([
+describe('[iEval]', () => {
+  it('[iEval] params is Function', async () => {
+    const ctx = await iEval([
       `function main() {
         return 0;
       }`
