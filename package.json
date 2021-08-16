@@ -1,6 +1,6 @@
 {
   "name": "ieval",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "javascript async interpreter. Through it, dynamically updates codes can be implemented",
   "main": "./lib/",
   "miniprogram": "lib",
