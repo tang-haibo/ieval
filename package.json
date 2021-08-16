@@ -1,7 +1,7 @@
 {
   "name": "ieval",
   "version": "1.2.1",
-  "description": "js在微信小程序等环境实现远程载入其他实现库进行调用",
+  "description": "javascript async interpreter. Through it, dynamically updates codes can be implemented",
   "main": "./lib/",
   "miniprogram": "lib",
   "scripts": {
