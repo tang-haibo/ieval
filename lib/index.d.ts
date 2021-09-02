@@ -312,6 +312,9 @@ declare module "ieval" {
     import { ParseResult } from '@babel/parser';
     import { EvalScript } from "src/eval/index";
     import { FileNode } from "src/eval/interpreter/nodes";
+    interface RuntimeContext {
+        [type: string]: any;
+    }
     enum CodeType {
         NETWORK = 1,
         CODE = 2,

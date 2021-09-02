@@ -1,0 +1,94 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /Users/tanghaibo/soft/apache-maven-3.8.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/tanghaibo/soft/apache-maven-3.8.1/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  16.6.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: Failed to replace env in config: ${COVERALLS_REPO_TOKEN}
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:98430:13
+      at String.replace (<anonymous>)
+      at envReplace (/usr/local/lib/node_modules/yarn/lib/cli.js:98425:16)
+      at Function.normalizeConfig (/usr/local/lib/node_modules/yarn/lib/cli.js:31887:69)
+      at NpmRegistry.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:31917:34)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "ieval",
+    "version": "1.2.4",
+    "description": "javascript async interpreter. Through it, dynamically updates codes can be implemented",
+    "main": "./lib/",
+    "types": "./lib/index.d.ts",
+    "miniprogram": "lib",
+    "scripts": {
+      "dev": "./node_modules/.bin/rollup --config ./config/rollup.config.dev.ts --configPlugin typescript --watch",
+      "build": "./node_modules/.bin/rollup --config ./config/rollup.config.prod.ts --configPlugin typescript",
+      "release": "npm publish",
+      "coverage": "cat ./coverage/lcov.info | coveralls",
+      "build:type": "rm -rf ./types/main.d.ts || 1 && rm -rf ./lib/index.d.ts || 1 && tsc --declaration --out ./types/main.d.ts -t es2015 --emitDeclarationOnly --out ./types/main.d.ts && sed -e 's/src[\\/]index/ieval/g' ./types/main.d.ts > ./lib/index.d.ts && rm -rf ./types/main.d.ts || 1",
+      "test": "jest"
+    },
+    "files": [
+      "lib",
+      "tsconfig.json"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/tang-haibo/ieval.git"
+    },
+    "keywords": [
+      "ieval",
+      "eval"
+    ],
+    "author": "tang-haibo",
+    "license": "(MIT OR Apache-2.0)",
+    "bugs": {
+      "url": "https://github.com/tang-haibo/ieval/issues"
+    },
+    "homepage": "https://github.com/tang-haibo/ieval#readme",
+    "devDependencies": {
+      "@babel/parser": "^7.15.2",
+      "@babel/types": "^7.15.0",
+      "@rollup/plugin-json": "^4.1.0",
+      "@types/jest": "^26.0.24",
+      "@types/jsdom": "^16.2.13",
+      "@types/lodash": "^4.14.171",
+      "@types/node": "^16.4.13",
+      "@types/request": "^2.48.7",
+      "coveralls": "^3.1.1",
+      "jest": "^27.0.6",
+      "jsdom": "^16.7.0",
+      "request": "^2.88.2",
+      "rollup": "^2.54.0",
+      "rollup-plugin-commonjs": "^10.1.0",
+      "rollup-plugin-node-resolve": "^5.2.0",
+      "rollup-plugin-typescript": "^1.0.1",
+      "rollup-plugin-uglify": "^6.0.4",
+      "ts-jest": "^27.0.4",
+      "ts-node": "^10.2.0",
+      "tslib": "^2.3.0",
+      "typescript": "^4.3.5"
+    },
+    "dependencies": {
+      "@babel/parser": "^7.15.2",
+      "@babel/types": "^7.15.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

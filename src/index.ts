@@ -3,6 +3,9 @@ import {EvalScript} from './eval';
 import { FileNode } from './eval/interpreter/nodes';
 import { isJSON, isNetworkUrl, isString } from './utils';
 
+interface RuntimeContext {
+  [type: string]: any;
+}
 enum CodeType {
   NETWORK = 1,
   CODE = 2,
@@ -100,7 +103,7 @@ class DocumentEval {
       item.setDefined();
       return item.value;
     }), this.context);
-    return this.ctx.getWindow();
+    return this.ctx && this.ctx.getWindow();
   }
 }
 
