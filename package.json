@@ -1,19 +1,20 @@
 {
   "name": "ieval",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "javascript async interpreter. Through it, dynamically updates codes can be implemented",
-  "main": "./lib/",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "miniprogram": "lib",
   "scripts": {
     "dev": "./node_modules/.bin/rollup --config ./config/rollup.config.dev.ts --configPlugin typescript --watch",
     "build": "./node_modules/.bin/rollup --config ./config/rollup.config.prod.ts --configPlugin typescript",
     "release": "npm publish",
     "coverage": "cat ./coverage/lcov.info | coveralls",
+    "build:type": "rm -rf ./types/main.d.ts || 1 && rm -rf ./lib/index.d.ts || 1 && tsc --declaration --out ./types/main.d.ts -t es2015 --emitDeclarationOnly --out ./types/main.d.ts && sed -e 's/src[\\/]index/ieval/g' ./types/main.d.ts > ./lib/index.d.ts && rm -rf ./types/main.d.ts || 1",
     "test": "jest"
   },
   "files": [
     "lib",
-    "types",
     "tsconfig.json"
   ],
   "repository": {
@@ -39,7 +40,6 @@
     "@types/lodash": "^4.14.171",
     "@types/node": "^16.4.13",
     "@types/request": "^2.48.7",
-    "acorn": "^8.3.0",
     "coveralls": "^3.1.1",
     "jest": "^27.0.6",
     "jsdom": "^16.7.0",
