@@ -1788,7 +1788,7 @@ export class Interpreter {
 
 				if (handlerClosure) {
 					try {
-						result = this.setValue(handlerClosure(err));
+						result = this.setValue(handlerClosure(err as any));
 						if (result instanceof Return) {
 							finalReturn = result;
 						}
