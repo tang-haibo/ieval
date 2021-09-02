@@ -1,6 +1,6 @@
 {
   "name": "ieval",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "javascript async interpreter. Through it, dynamically updates codes can be implemented",
   "main": "./lib/",
   "types": "lib/index.d.ts",
